@@ -1,25 +1,40 @@
 .controls-panel {
-  background: rgba(20, 20, 30, 0.8); /* panel semi-transparan gelap */
-  color: #fff; /* teks putih agar kontras */
+  background: rgba(0, 0, 20, 0.95);
+  color: white;
   padding: 20px;
-  border-radius: 16px;
-  width: 320px;
-  font-family: 'Poppins', sans-serif;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.controls-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.controls-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.controls-panel::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 136, 0.5);
+  border-radius: 10px;
 }
 
 .controls-panel h2 {
-  margin: 0 0 5px;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #ffcc00; /* judul warna emas */
-  text-shadow: 0 0 8px rgba(255, 255, 100, 0.5);
+  margin-bottom: 5px;
+  font-size: 24px;
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
 
 .subtitle {
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 20px;
 }
 
@@ -27,70 +42,128 @@
   margin-bottom: 20px;
 }
 
-label {
-  font-weight: 600;
-  margin-bottom: 6px;
+.control-group label {
   display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #00ff88;
+  font-size: 14px;
 }
 
-select,
-input {
+.control-group input,
+.control-group select {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  border: none;
-  background: #1c1c2b;
-  color: #fff;
-  font-size: 0.95rem;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+  outline: none;
+  border-color: #00ff88;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.asteroid-info {
+  background: rgba(0, 255, 136, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.asteroid-info h4 {
+  margin: 0 0 10px 0;
+  color: #00ff88;
+  font-size: 16px;
+}
+
+.asteroid-info p {
+  margin: 5px 0;
+  font-size: 13px;
 }
 
 .simulate-btn {
   width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #ff4400;
+  padding: 16px;
+  background: linear-gradient(135deg, #ff4444, #cc0000);
   color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: bold;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
 }
 
 .simulate-btn:hover:not(:disabled) {
-  background: #ff6611;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(255, 68, 68, 0.6);
+  background: linear-gradient(135deg, #ff5555, #dd0000);
+}
+
+.simulate-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .simulate-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
-}
-
-.asteroid-info {
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 3px solid #ffcc00;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  background: rgba(255, 68, 68, 0.3);
 }
 
 .presets {
   margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.preset-buttons button {
-  background: #222;
-  color: #fff;
-  border: 1px solid #333;
+.presets h4 {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #00ff88;
+}
+
+.preset-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.presets button {
+  padding: 10px;
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid rgba(0, 255, 136, 0.3);
   border-radius: 8px;
-  padding: 6px 10px;
-  margin: 4px;
+  color: white;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s;
+  font-size: 13px;
 }
 
-.preset-buttons button:hover {
-  background: #333;
-  border-color: #ff4400;
+.presets button:hover:not(:disabled) {
+  background: rgba(0, 255, 136, 0.3);
+  border-color: #00ff88;
+  transform: translateY(-2px);
+}
+
+.presets button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

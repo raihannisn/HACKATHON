@@ -1,22 +1,26 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import * as THREE from 'three';
 
 function ImpactEffect({ impactLocation, show = false }) {
-  // Hitung posisi dengan aman
-  const position = useMemo(() => {
-    if (!impactLocation) return [0, 0, 0];
+  // Convert lat/lon to 3D position
+  const getPosition = (lat, lon, altitude = 1.02) => {
+    const phi = (90 - lat) * (Math.PI / 180);
+    const theta = (lon + 180) * (Math.PI / 180);
 
-    const phi = (90 - impactLocation.lat) * (Math.PI / 180);
-    const theta = (impactLocation.lon + 180) * (Math.PI / 180);
-
-    const x = -(1.02 * Math.sin(phi) * Math.cos(theta));
-    const y = 1.02 * Math.cos(phi);
-    const z = 1.02 * Math.sin(phi) * Math.sin(theta);
+    const x = -(altitude * Math.sin(phi) * Math.cos(theta));
+    const y = altitude * Math.cos(phi);
+    const z = altitude * Math.sin(phi) * Math.sin(theta);
 
     return [x, y, z];
+  };
+
+  // Compute position only if impactLocation exists
+  const position = useMemo(() => {
+    if (!impactLocation) return [0, 0, 0];
+    return getPosition(impactLocation.lat, impactLocation.lon);
   }, [impactLocation]);
 
-  // Buat partikel hanya sekali (tidak tergantung kondisi `show`)
+  // Create particles for explosion effect
   const particlesGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
     const count = 1000;
@@ -30,18 +34,18 @@ function ImpactEffect({ impactLocation, show = false }) {
     return geometry;
   }, []);
 
-  // Setelah semua hook, baru kondisi render
+  // Return null after hooks are safely called
   if (!show || !impactLocation) return null;
 
   return (
     <group position={position}>
-      {/* Flash ledakan */}
+      {/* Explosion flash */}
       <mesh>
         <sphereGeometry args={[0.05, 16, 16]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
       </mesh>
 
-      {/* Partikel */}
+      {/* Particles */}
       <points geometry={particlesGeometry}>
         <pointsMaterial 
           color="#ff4400" 

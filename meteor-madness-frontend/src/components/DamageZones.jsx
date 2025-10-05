@@ -8,7 +8,7 @@ function DamageZones({ simulationData, impactLocation }) {
 
   // Convert km to 3D scale (1 unit = Earth radius)
   const EARTH_RADIUS_KM = 6371;
-  const scale = (km) => km / EARTH_RADIUS_KM;
+  const scale = (km) => parseFloat(km) / EARTH_RADIUS_KM;
 
   // Convert lat/lon to 3D position
   const getPosition = (lat, lon, altitude = 1.005) => {
