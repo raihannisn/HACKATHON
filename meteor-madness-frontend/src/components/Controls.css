@@ -1,0 +1,96 @@
+.controls-panel {
+  background: rgba(20, 20, 30, 0.8); /* panel semi-transparan gelap */
+  color: #fff; /* teks putih agar kontras */
+  padding: 20px;
+  border-radius: 16px;
+  width: 320px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.controls-panel h2 {
+  margin: 0 0 5px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffcc00; /* judul warna emas */
+  text-shadow: 0 0 8px rgba(255, 255, 100, 0.5);
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.control-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: none;
+  background: #1c1c2b;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.simulate-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4400;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.simulate-btn:hover:not(:disabled) {
+  background: #ff6611;
+}
+
+.simulate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.asteroid-info {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #ffcc00;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.presets {
+  margin-top: 25px;
+}
+
+.preset-buttons button {
+  background: #222;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-buttons button:hover {
+  background: #333;
+  border-color: #ff4400;
+}

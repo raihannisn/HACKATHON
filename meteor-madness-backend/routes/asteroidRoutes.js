@@ -6,10 +6,10 @@ const asteroidController = require('../controllers/asteroidController');
 // Get all asteroids with filtering
 router.get('/', asteroidController.getAsteroids);
 
-// Get asteroid by ID
-router.get('/:id', asteroidController.getAsteroidById);
-
-// Get NEO feed (weekly overview)
+// Get NEO feed (weekly overview) - PINDAH KE ATAS!
 router.get('/feed/weekly', asteroidController.getFeed);
+
+// Get asteroid by ID - PINDAH KE BAWAH!
+router.get('/:id', asteroidController.getAsteroidById);
 
 module.exports = router;
