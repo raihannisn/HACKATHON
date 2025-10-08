@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import * as THREE from 'three';
 
 function ImpactEffect({ impactLocation, show = false }) {
-  // Convert lat/lon to 3D position
+  // Convert lat/lon to 3D position (selalu bisa dipanggil, tapi aman)
   const getPosition = (lat, lon, altitude = 1.02) => {
     const phi = (90 - lat) * (Math.PI / 180);
     const theta = (lon + 180) * (Math.PI / 180);
@@ -14,13 +14,7 @@ function ImpactEffect({ impactLocation, show = false }) {
     return [x, y, z];
   };
 
-  // Compute position only if impactLocation exists
-  const position = useMemo(() => {
-    if (!impactLocation) return [0, 0, 0];
-    return getPosition(impactLocation.lat, impactLocation.lon);
-  }, [impactLocation]);
-
-  // Create particles for explosion effect
+  // Gunakan useMemo di luar kondisi apa pun
   const particlesGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
     const count = 1000;
@@ -34,8 +28,10 @@ function ImpactEffect({ impactLocation, show = false }) {
     return geometry;
   }, []);
 
-  // Return null after hooks are safely called
+  // Jika tidak show atau tidak ada lokasi → tidak render apa pun
   if (!show || !impactLocation) return null;
+
+  const position = getPosition(impactLocation.lat, impactLocation.lon);
 
   return (
     <group position={position}>
@@ -47,10 +43,10 @@ function ImpactEffect({ impactLocation, show = false }) {
 
       {/* Particles */}
       <points geometry={particlesGeometry}>
-        <pointsMaterial 
-          color="#ff4400" 
-          size={0.01} 
-          transparent 
+        <pointsMaterial
+          color="#ff4400"
+          size={0.01}
+          transparent
           opacity={0.8}
         />
       </points>

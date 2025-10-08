@@ -1,58 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Earth from './Earth';
 import Asteroid from './Asteroid';
 import DamageZones from './DamageZones';
 import ImpactEffect from './ImpactEffect';
 
-function Scene3D({ impactLocation, simulationData }) {
-  const [showAsteroid, setShowAsteroid] = useState(false);
-  const [showImpact, setShowImpact] = useState(false);
-
-  // 🎯 Ketika backend kirim data baru → mulai simulasi
-  useEffect(() => {
-    if (simulationData && impactLocation) {
-      setShowAsteroid(true);
-      setShowImpact(false);
-    }
-  }, [simulationData, impactLocation]);
-
-  // 🚀 Ketika asteroid menabrak bumi
-  const handleImpact = () => {
-    setShowAsteroid(false);
-    setTimeout(() => setShowImpact(true), 400);
-  };
-
+function Scene3D({ impactLocation, simulationData, showAsteroid = true }) {
   return (
     <>
-      {/* 🌍 Bumi berputar pelan */}
-      <Earth 
-        impactLocation={impactLocation} 
-        rotationSpeed={0.002} 
-      />
+      {/* Earth */}
+      <Earth impactLocation={impactLocation} />
 
-      {/* ☄️ Asteroid muncul setelah backend kasih data */}
+      {/* Asteroid approaching */}
       {showAsteroid && (
-        <Asteroid
-          impactLocation={impactLocation}
+        <Asteroid 
+          position={[2, 1, 0]} 
           size={0.05}
-          speed={0.02}     // kecepatan jatuh
-          onImpact={handleImpact}
+          visible={true}
         />
       )}
 
-      {/* 💥 Efek tumbukan setelah asteroid hilang */}
-      {showImpact && (
-        <ImpactEffect 
-          impactLocation={impactLocation} 
-          show={true} 
-        />
-      )}
-
-      {/* 🔥 Zona kerusakan muncul setelah impact */}
-      {showImpact && simulationData && (
+      {/* Damage Zones */}
+      {simulationData && (
         <DamageZones 
-          simulationData={simulationData} 
-          impactLocation={impactLocation} 
+          simulationData={simulationData}
+          impactLocation={impactLocation}
+        />
+      )}
+
+      {/* Impact Effect */}
+      {simulationData && (
+        <ImpactEffect 
+          impactLocation={impactLocation}
+          show={true}
         />
       )}
     </>

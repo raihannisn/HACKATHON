@@ -10,6 +10,12 @@ function Controls({
   onSimulate,
   loading
 }) {
+  // Helper to safely format numbers
+  const safeNumber = (value, decimals = 2) => {
+    const num = typeof value === 'string' ? parseFloat(value) : value;
+    return isNaN(num) ? 0 : parseFloat(num.toFixed(decimals));
+  };
+
   return (
     <div className="controls-panel">
       <h2>🌠 Meteor Madness</h2>
@@ -30,7 +36,7 @@ function Controls({
           {asteroids.map(asteroid => (
             <option key={asteroid.id} value={asteroid.id}>
               {asteroid.name} 
-              {' '}({(asteroid.estimated_diameter.kilometers.estimated_diameter_max).toFixed(2)} km)
+              {' '}({safeNumber(asteroid.estimated_diameter.kilometers.estimated_diameter_max)} km)
               {asteroid.is_potentially_hazardous_asteroid && ' ⚠️'}
             </option>
           ))}
@@ -41,7 +47,7 @@ function Controls({
       {selectedAsteroid && (
         <div className="asteroid-info">
           <h4>📊 Asteroid Info</h4>
-          <p><strong>Diameter:</strong> {selectedAsteroid.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2)} km</p>
+          <p><strong>Diameter:</strong> {safeNumber(selectedAsteroid.estimated_diameter.kilometers.estimated_diameter_max)} km</p>
           <p><strong>Hazardous:</strong> {selectedAsteroid.is_potentially_hazardous_asteroid ? '⚠️ YES' : '✅ NO'}</p>
         </div>
       )}

@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^9.122.0",
-    "@react-three/fiber": "^8.18.0",
-    "ajv": "^6.12.6",
-    "ajv-keywords": "^3.5.2",
-    "axios": "^1.12.2",
+    "@react-three/drei": "^9.88.0",
+    "@react-three/fiber": "^8.15.0",
+    "axios": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "three": "^0.180.0",
+    "three": "^0.158.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
